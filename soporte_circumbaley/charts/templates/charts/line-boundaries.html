@@ -1,0 +1,33 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Inicio{% endblock %}
+{% block content %}
+
+<div class="content">
+    <div class="wrapper col-3">
+        <canvas id="chart-0"></canvas>
+    </div>
+    <div class="wrapper col-3">
+        <canvas id="chart-1"></canvas>
+    </div>
+    <div class="wrapper col-3">
+        <canvas id="chart-2"></canvas>
+    </div>
+    <div class="wrapper col-3">
+        <canvas id="chart-3"></canvas>
+    </div>
+
+    <div class="toolbar">
+        <button onclick="toggleSmooth(this)">Smooth</button>
+        <button onclick="randomize(this)">Randomize</button>
+    </div>
+</div>
+<link rel="stylesheet" type="text/css" href="{% static 'charts/css/style.css' %}">
+<script src="{% static 'charts/dist/Chart.min.js' %}"></script>
+<script src="{% static 'charts/js/utils.js' %}"></script>
+<script src="{% static 'charts/js/analyser.js' %}"></script>
+
+<script src="{% static 'charts/js/line-boundaries.js' %}"></script>
+{% endblock %}
+
+

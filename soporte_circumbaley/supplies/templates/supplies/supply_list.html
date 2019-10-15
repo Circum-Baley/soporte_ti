@@ -1,0 +1,26 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Listado supplies{% endblock %}
+{% block content %}
+{% include 'supplies/includes/supplies_menu.html' %}
+<main role="main">
+    <div class="container mb-4">
+        {% for supplie in object_list|dictsort:"id" reversed %}
+        <div class="row mt-3">
+            <div class="col-md-9 mx-auto">
+                <h2 class="mb-4">{{supplie.name}}</h2>
+                <div>
+                    <p>{{supplies.description|striptags|safe|truncatechars:"10"}}</p>
+                    <p><a href="{% url 'supplies:supply' supply.id supply.name|slugify %}">Leer más</a>
+                        {% if request.user.is_staff %}
+                        | <a href="{% url 'supplies:update' supply.id %}">Editar</a>
+                        | <a href="{% url 'supplies:delete' supply.id %}">Borrar</a>
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</main>
+{% endblock %}

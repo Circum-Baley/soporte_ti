@@ -1,0 +1,27 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Listado Dispositivo{% endblock %}
+{% block content %}
+{% include 'categories/includes/categories_menu.html' %}
+<main role="main">
+    <div class="container mb-4">
+        {% for category in object_list|dictsort:"id" reversed %}
+        <div class="row mt-3">
+            <div class="col-md-9 mx-auto">
+                <h2 class="mb-4">{{category.name}}</h2>
+                <div>
+                    <p>{{category.description|striptags|safe|truncatechars:"10"}}</p>
+
+                    <p><a href="{% url 'categories:category' category.id category.name|slugify %}">Leer más</a>
+                        {% if request.user.is_staff %}
+                        | <a href="{% url 'categories:update' category.id %}">Editar</a>
+                        | <a href="{% url 'categories:delete' category.id %}">Borrar</a>
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</main>
+{% endblock %}
